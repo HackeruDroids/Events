@@ -3,31 +3,81 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#329cce"
     android:layout_height="match_parent"
     tools:context="edu.hackeru.events.MainActivity">
 
-    <EditText
-        android:id="@+id/etShout"
+    <RadioGroup
+        android:id="@+id/rgTemperature"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintLeft_toLeftOf="@+id/etTemperature"
+        app:layout_constraintRight_toRightOf="@+id/etTemperature"
+        app:layout_constraintTop_toBottomOf="@+id/etTemperature">
+
+        <RadioButton
+            android:id="@+id/rbCelcius"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:textColor="#fff"
+            android:layout_weight="1"
+            android:text="Celcius" />
+
+        <RadioButton
+            android:id="@+id/rbFahrenheit"
+            android:textColor="#fff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Fahrenheit" />
+    </RadioGroup>
+
+    <EditText
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:id="@+id/etTemperature"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Shout away..."
-        android:inputType="textPersonName"
+        android:hint="Temperature..."
+        android:inputType="numberDecimal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnShout"
+        android:id="@+id/btnCalc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:text="Shout"
+        android:layout_marginLeft="0dp"
         android:textAllCaps="false"
+        android:layout_marginTop="24dp"
+        android:text="Calculate"
+        android:textColor="#fff"
+        app:layout_constraintLeft_toLeftOf="@+id/rgTemperature"
+        app:layout_constraintTop_toBottomOf="@+id/rgTemperature" />
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="24dp"
+        android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCalc"
+        app:layout_constraintVertical_bias="0.0" />
+
 </android.support.constraint.ConstraintLayout>

@@ -6,27 +6,63 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private EditText etShout;
-    private Button btnShout;
+    //1) controller properties:
+    RadioGroup rgTemperature;
+    RadioButton rbCelcius;
+    RadioButton rbFahrenheit;
+    Button btnCalc;
+    EditText etTemperature;
+    TextView tvResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        etShout = (EditText) findViewById(R.id.etShout);
-        btnShout = (Button) findViewById(R.id.btnShout);
+        rgTemperature = (RadioGroup) findViewById(R.id.rgTemperature);
+        rbCelcius = (RadioButton) findViewById(R.id.rbCelcius);
+        rbFahrenheit = (RadioButton) findViewById(R.id.rbFahrenheit);
+        etTemperature = (EditText) findViewById(R.id.etTemperature);
+        tvResult = (TextView) findViewById(R.id.tvResult);
+        btnCalc = (Button) findViewById(R.id.btnCalc);
 
-        //btnShout.setText(R.string.hello);
-        btnShout.setOnClickListener(this);
+        btnCalc.setOnClickListener(this);
+
     }
+
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(this, etShout.getText().toString().toUpperCase(), Toast.LENGTH_SHORT).show();
+        try {
+            //1) get the text from the editTemp
+            Editable text = etTemperature.getText();
+
+            //2) convert the text to a double variable (Double.valueOf()
+            Double temp = Double.valueOf(text.toString());
+
+            //3) decide about the formula (if rbCelcius -> toCelcius, else toFahrenheit Formula
+            Double result = 0.0;
+            if (rbCelcius.isChecked()) {
+                //from fahrenheit to Celsius
+                //T(°C) = (T(°F) - 32)*5/9
+                result = (temp - 32) * 5.0 / 9;
+            } else if (rbFahrenheit.isChecked()) {
+                //from Celsius  to  fahrenheit
+                //T(°F) = T(°C) × 9/5 + 32
+                result = temp * 9.0/5 + 32;
+            }
+
+            //3.1) do the conversion of 2 using the formula from 3
+            //4) set the text on the tvResult
+            tvResult.setText(result.toString());
+        } catch (NumberFormatException e) {
+            etTemperature.setError("Not a number...");
+        }
     }
 }
