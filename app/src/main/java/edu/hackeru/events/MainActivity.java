@@ -1,5 +1,6 @@
 package edu.hackeru.events;
 
+import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -11,7 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     //1) controller properties:
     RadioGroup rgTemperature;
     RadioButton rbCelcius;
@@ -31,14 +32,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etTemperature = (EditText) findViewById(R.id.etTemperature);
         tvResult = (TextView) findViewById(R.id.tvResult);
         btnCalc = (Button) findViewById(R.id.btnCalc);
-
         btnCalc.setOnClickListener(this);
-
+        rgTemperature.setOnCheckedChangeListener(this);
     }
 
 
     @Override
     public void onClick(View view) {
+        calc();
+    }
+
+    private void calc() {
         try {
             //1) get the text from the editTemp
             Editable text = etTemperature.getText();
@@ -64,5 +68,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (NumberFormatException e) {
             etTemperature.setError("Not a number...");
         }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+        calc();
     }
 }
