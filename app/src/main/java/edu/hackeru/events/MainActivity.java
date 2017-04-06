@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +18,13 @@ public class MainActivity extends AppCompatActivity {
         Button btnShout = (Button) findViewById(R.id.btnShout);
 
         //btnShout.setText(R.string.hello);
-        btnShout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Hello, Events", Toast.LENGTH_SHORT).show();
-            }
-        });
+        btnShout.setOnClickListener(this);
         etShout.setText("");
 
     }
 
+    @Override
+    public void onClick(View view) {
+        Toast.makeText(this, "Hello, Events", Toast.LENGTH_SHORT).show();
+    }
 }
